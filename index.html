@@ -1,1 +1,248 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câmpul de Luptă Interior - Logismoi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chosen Palette: Calm Harmony -->
+    <!-- Application Structure Plan: Am structurat website-ul în secțiuni logice: Introducere, Ce sunt Logismoi?, Etapele Atacului (punct cheie 1), Armele Spirituale (punct cheie 2) și Scopul Final. Fiecare secțiune este clar delimitată și conține informații concise. Etapele atacului sunt interactive, permițând utilizatorului să exploreze fiecare pas. Această structură liniară, dar cu elemente interactive, facilitează înțelegerea și memorarea, fiind ideală pentru o prezentare rapidă a ideilor principale. -->
+    <!-- Visualization & Content Choices: Am folosit text concis și liste pentru a prezenta informațiile. Pentru etapele Logismoi, am implementat un sistem de butoane/panouri expandabile, similar cu o diagramă de proces, pentru a vizualiza progresia. Armele spirituale sunt prezentate ca o grilă de carduri, oferind o vizualizare rapidă a metodelor de apărare. Nu am folosit SVG sau Chart.js, deoarece conținutul este preponderent calitativ și conceptual, iar elementele HTML/CSS/JS sunt suficiente pentru a ilustra ideile. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        :root {
+            --bg-main: #FDFBF6;
+            --text-primary: #334155; /* Slate 700 */
+            --text-secondary: #64748b; /* Slate 500 */
+            --accent-primary: #B99C6B; /* Muted Gold */
+            --accent-secondary: #E9E1D3;
+            --border-color: #D9CBB9;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+        }
+        .accent-bg { background-color: var(--accent-primary); }
+        .accent-text { color: var(--accent-primary); }
+        .accent-border { border-color: var(--accent-primary); }
+        .secondary-bg { background-color: var(--accent-secondary); }
+        .border-custom { border-color: var(--border-color); }
+        .stage-btn {
+            transition: all 0.3s ease-in-out;
+        }
+        .stage-btn.active {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            background-color: var(--accent-primary);
+            color: white;
+        }
+        .content-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, padding 0.5s ease-out;
+            padding: 0 1.5rem;
+        }
+        .content-panel.active {
+            max-height: 500px; /* Adjust as needed */
+            padding: 1.5rem;
+        }
+        .arrow {
+            font-size: 2rem;
+            color: var(--text-secondary);
+            align-self: center;
+        }
+        @media (max-width: 768px) {
+            .stages-container {
+                flex-direction: column;
+            }
+            .arrow {
+                transform: rotate(90deg);
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8 max-w-5xl">
+        
+        <!-- Titlu Principal -->
+        <header class="text-center mb-12 border-b-2 border-custom pb-6">
+            <h1 class="text-3xl md:text-4xl font-bold mb-2">Câmpul de Luptă Interior</h1>
+            <p class="text-lg text-text-secondary">Cunoașterea și Respingerea Gândurilor (Logismoi) în Spiritualitatea Ortodoxă</p>
+        </header>
+
+        <!-- Secțiunea Introducere -->
+        <section id="intro" class="mb-16 text-center bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+            <h2 class="text-2xl font-bold mb-4 accent-text">Războiul Nevăzut: O Introducere</h2>
+            <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+                Spiritualitatea creștină ortodoxă vede viața ca un "război spiritual" continuu, o luptă interioară în minte și inimă. Scopul este purificarea, iluminarea și <b class="font-semibold">îndumnezeirea (theosis)</b>. În centrul acestei lupte stă conceptul de <i class="font-semibold">logismoi</i>, gânduri-asalt care încearcă să ne îndepărteze de Dumnezeu. Arena principală a acestui război este <b class="font-semibold">nous-ul</b> (mintea/intelectul).
+            </p>
+        </section>
+
+        <!-- Secțiunea Ce sunt Logismoi? -->
+        <section id="what-are-logismoi" class="mb-16 p-6 rounded-lg bg-white shadow-lg border border-gray-200">
+            <h2 class="text-2xl font-bold mb-4 text-center">Ce sunt <span class="accent-text">Logismoi</span>?</h2>
+            <div class="flex flex-col md:flex-row items-center gap-6">
+                <div class="text-7xl accent-text">💡</div>
+                <div>
+                    <p class="text-lg mb-2">
+                        <b class="font-semibold">Logismoi</b> nu sunt gânduri neutre, ci "gânduri-asalt" sau "sugestii pătimașe" care urmăresc să ne devieze de la Hristos și să ne ducă la păcat.
+                    </p>
+                    <ul class="list-disc list-inside text-base text-text-secondary space-y-2">
+                        <li><b>Origine Externă:</b> Percepute ca "săgeți" sau "momeli" demonice.</li>
+                        <li><b>Scop Precis:</b> Tulburarea sufletului, ademenirea spre păcat.</li>
+                        <li><b>Sămânța Păcatului:</b> Un *logismos* acceptat devine rădăcina unei patimi.</li>
+                    </ul>
+                    <h3 class="font-bold text-lg mt-4 mb-2">Originile Logismoi:</h3>
+                    <ul class="list-disc list-inside text-base text-text-secondary space-y-2">
+                        <li><b>Păcatul Originar:</b> A corupt nous-ul, făcându-l distras.</li>
+                        <li><b>Instigarea Demonică:</b> "Vorbirea demonilor", o forță externă malevolentă.</li>
+                        <li><b>Înclinațiile Umane (Patimile):</b> Dorințe și pofte (ex: iubirea de sine) care generează *logismoi*.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Secțiunea Punct Cheie 1: Etapele Atacului -->
+        <section id="stages" class="mb-16">
+            <h2 class="text-2xl font-bold mb-2 text-center">Punct Cheie 1: Etapele Atacului unui <span class="accent-text">Logismos</span></h2>
+            <p class="text-center text-text-secondary mb-8">Părinții Bisericii au identificat un proces prin care o sugestie se transformă în patimă. Apasă pe fiecare etapă pentru a vedea descrierea.</p>
+
+            <div class="w-full max-w-4xl mx-auto">
+                <div class="stages-container flex justify-between items-start mb-6">
+                    <button data-target="content-1" class="stage-btn flex-1 p-3 m-1 rounded-lg border border-custom bg-white shadow-sm text-center">1. Momeala</button>
+                    <div class="arrow">&rarr;</div>
+                    <button data-target="content-2" class="stage-btn flex-1 p-3 m-1 rounded-lg border border-custom bg-white shadow-sm text-center">2. Însoțirea</button>
+                     <div class="arrow">&rarr;</div>
+                    <button data-target="content-3" class="stage-btn flex-1 p-3 m-1 rounded-lg border border-custom bg-white shadow-sm text-center">3. Consimțirea</button>
+                     <div class="arrow">&rarr;</div>
+                    <button data-target="content-4" class="stage-btn flex-1 p-3 m-1 rounded-lg border border-custom bg-white shadow-sm text-center">4. Robia</button>
+                     <div class="arrow">&rarr;</div>
+                    <button data-target="content-5" class="stage-btn flex-1 p-3 m-1 rounded-lg border border-custom bg-white shadow-sm text-center">5. Patima</button>
+                </div>
+
+                <div id="content-container" class="mt-4 rounded-lg bg-white border border-gray-200 shadow-inner">
+                    <div id="content-1" class="content-panel">
+                        <h3 class="font-bold text-lg mb-2 accent-text">1. Momeala (Asaltul/Sugestia)</h3>
+                        <p>Prima apariție a gândului rău. Nu există vină, deoarece nu putem controla apariția sugestiilor. Este o scânteie bruscă.</p>
+                    </div>
+                    <div id="content-2" class="content-panel">
+                        <h3 class="font-bold text-lg mb-2 accent-text">2. Însoțirea (Interacțiunea)</h3>
+                        <p>Dialogul cu gândul. Începe responsabilitatea personală. Este riscant și periculos, dar încă nu păcat.</p>
+                    </div>
+                    <div id="content-3" class="content-panel">
+                        <h3 class="font-bold text-lg mb-2 accent-text">3. Consimțirea (Acceptarea)</h3>
+                        <p>Decizia conștientă de a accepta gândul. Aici începe păcatul în inimă, chiar dacă fapta nu e comisă.</p>
+                    </div>
+                    <div id="content-4" class="content-panel">
+                        <h3 class="font-bold text-lg mb-2 accent-text">4. Robia (Captivitatea)</h3>
+                        <p>Repetarea faptei duce la obicei. Omul devine robit de păcat, fiind din ce în ce mai greu să se opună.</p>
+                    </div>
+                    <div id="content-5" class="content-panel">
+                        <h3 class="font-bold text-lg mb-2 accent-text">5. Patima (Obsesia)</h3>
+                        <p>Stadiul final, gândul devine o "a doua natură", o boală a sufletului care domină voința și rațiunea. Omul caută activ să păcătuiască.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secțiunea Punct Cheie 2: Armele Spirituale -->
+        <section id="arsenal" class="mb-16">
+            <h2 class="text-2xl font-bold mb-8 text-center">Punct Cheie 2: Arsenalul Spiritual: Metode de Apărare</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🧘</div>
+                    <h3 class="font-bold text-lg mb-2">Trezvia (Veghea)</h3>
+                    <p class="text-sm text-text-secondary">Vigilență continuă asupra gândurilor, "paza inimii", pentru a detecta și respinge *logismoi*.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🙏</div>
+                    <h3 class="font-bold text-lg mb-2">Rugăciunea lui Iisus</h3>
+                    <p class="text-sm text-text-secondary">Arma principală, invocarea numelui lui Iisus pentru a "arde" gândurile rele și a curăța mintea.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">⚔️</div>
+                    <h3 class="font-bold text-lg mb-2">Tăierea Imediată</h3>
+                    <p class="text-sm text-text-secondary">Refuzul categoric și instantaneu al gândului în faza de "asalt", fără dialog.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🕊️</div>
+                    <h3 class="font-bold text-lg mb-2">Smerenia și Nădejdea</h3>
+                    <p class="text-sm text-text-secondary">Recunoașterea propriei slăbiciuni și încrederea în ajutorul lui Dumnezeu.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🗣️</div>
+                    <h3 class="font-bold text-lg mb-2">Spovedania</h3>
+                    <p class="text-sm text-text-secondary">"Cea mai puternică armă împotriva păcatului", oferind iertare și un nou început.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🍞</div>
+                    <h3 class="font-bold text-lg mb-2">Euharistia</h3>
+                    <p class="text-sm text-text-secondary">Hrană și putere spirituală profundă prin unirea cu Hristos.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">🍎</div>
+                    <h3 class="font-bold text-lg mb-2">Postul</h3>
+                    <p class="text-sm text-text-secondary">Purificarea sufletului și întărirea spiritului prin abstinență și concentrare pe divin.</p>
+                </div>
+                <div class="p-6 rounded-lg bg-white shadow-lg border border-gray-200 text-center">
+                    <div class="text-4xl mb-3">📖</div>
+                    <h3 class="font-bold text-lg mb-2">Citirea Scripturilor</h3>
+                    <p class="text-sm text-text-secondary">Luminează mintea și întărește voința împotriva ispitelor.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secțiunea Scopul Final -->
+        <section id="theosis" class="text-center bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+             <h2 class="text-2xl font-bold mb-4 accent-text">Scopul Final: Nepătimirea și Unirea cu Dumnezeu</h2>
+             <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed mb-4">
+                Lupta interioară duce la <b class="font-semibold">Nepătimire (Apatheia)</b>: o stare de puritate și libertate de patimi, unde mintea este clară și orientată spre Dumnezeu. Aceasta nu este lipsa emoțiilor, ci vindecarea lor.
+             </p>
+             <p class="max-w-3xl mx-auto text-base md:text-lg leading-relaxed">
+                Apogeul este "mintea fără formă" în rugăciune, o stare de unire directă și nemijlocită cu Dumnezeu, transcenzând toate limitările. Această călătorie este o <b class="font-semibold">sinergie</b> între efortul uman și harul divin, ducând la adevărata libertate și <b class="font-semibold">Theosis (îndumnezeire)</b>.
+             </p>
+        </section>
+
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const stageButtons = document.querySelectorAll('.stage-btn');
+        const contentPanels = document.querySelectorAll('.content-panel');
+
+        stageButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.dataset.target;
+                const targetPanel = document.getElementById(targetId);
+
+                // If the clicked button is already active, deactivate everything
+                if (button.classList.contains('active')) {
+                    button.classList.remove('active');
+                    targetPanel.classList.remove('active');
+                    return;
+                }
+
+                // Deactivate all buttons and panels first
+                stageButtons.forEach(btn => btn.classList.remove('active'));
+                contentPanels.forEach(panel => panel.classList.remove('active'));
+
+                // Activate the clicked button and its corresponding panel
+                button.classList.add('active');
+                targetPanel.classList.add('active');
+            });
+        });
+        
+        // Open the first stage by default for initial view
+        const firstButton = document.querySelector('.stage-btn[data-target="content-1"]');
+        if (firstButton) {
+            firstButton.click();
+        }
+    });
+</script>
+
+</body>
+</html>
 
